@@ -88,6 +88,10 @@ export default function Weather() {
               <p>{Deg(dataCiti.wind?.deg)}</p>
             </div>
           </div>
+        ) : dataCiti?.cod == 404 ? (
+          <p className="not-weather">
+            К сожелению по данному городу нет информации
+          </p>
         ) : (
           <p className="not-weather">Давайте узнаем погоду ввашем городе</p>
         )}
