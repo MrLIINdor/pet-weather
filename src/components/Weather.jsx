@@ -43,7 +43,7 @@ export default function Weather() {
     const timeout = setTimeout(updateData, 500);
     return () => clearTimeout(timeout);
   }, [nameCity]);
-
+  console.log(dataCiti.cod);
   return (
     <div className="main-container">
       <input
@@ -54,7 +54,12 @@ export default function Weather() {
       />
 
       <div className="city">
-        {nameCity !== "" ? (
+        {dataCiti?.cod === "404" ||
+        (dataCiti?.cod === "400" && nameCity !== "") ? (
+          <p className="not-weather">
+            К сожелению по данному городу нет информации
+          </p>
+        ) : nameCity !== "" ? (
           <div>
             <h2 className="city-name">
               <span>{dataCiti?.name}</span>
@@ -88,10 +93,6 @@ export default function Weather() {
               <p>{Deg(dataCiti.wind?.deg)}</p>
             </div>
           </div>
-        ) : dataCiti?.cod == 404 ? (
-          <p className="not-weather">
-            К сожелению по данному городу нет информации
-          </p>
         ) : (
           <p className="not-weather">Давайте узнаем погоду ввашем городе</p>
         )}
