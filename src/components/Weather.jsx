@@ -33,6 +33,7 @@ export default function Weather() {
 
   useEffect(() => {
     const updateData = async () => {
+      if (nameCity.length == 0) return;
       await fetch(`${URL_BASE}weather?q=${nameCity}&units=metric&APPID=${KEY}`)
         .then((res) => res.json())
         .then((result) => {
@@ -40,10 +41,12 @@ export default function Weather() {
         });
     };
 
-    const timeout = setTimeout(updateData, 500);
+    const timeout = setTimeout(updateData, 1500);
     return () => clearTimeout(timeout);
   }, [nameCity]);
+
   console.log(dataCiti.cod);
+
   return (
     <div className="main-container">
       <input
